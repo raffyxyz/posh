@@ -185,13 +185,15 @@ const Guide = () => {
         </GuideBox>
       </GuidesBox>
 
-      <CustomButton
-        backgroundColor="#0F1B4C"
-        color="#fff"
-        buttonText="See Full Guides"
-        guideBtn={true}
-        navigateTo="/properties"
-      />
+      <Box sx={{ mt: 4 }}>
+        <CustomButton
+          backgroundColor="#0F1B4C"
+          color="#fff"
+          buttonText="See Full Guides"
+          guideBtn={true}
+          navigateTo="/properties"
+        />
+      </Box>
     </Box>
   );
 };
