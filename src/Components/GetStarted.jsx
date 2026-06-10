@@ -1,10 +1,13 @@
 import { styled, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import React from "react";
+import useScrollReveal from "../hooks/useScrollReveal";
 import homeIllustration from "../media/illustration.png";
 import CustomButton from "./CustomButton";
 
 const GetStarted = () => {
+  const [ref, visible] = useScrollReveal();
+
   const CustomContainer = styled(Container)(({ theme }) => ({
     backgroundColor: "#17275F",
     height: "416px",
@@ -30,16 +33,19 @@ const GetStarted = () => {
   }));
 
   return (
-    <CustomBox>
+    <CustomBox
+      ref={ref}
+      className={`reveal ${visible ? "visible" : ""}`}
+    >
       <CustomContainer>
-        <Box>
+        <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
           <Typography
-            sx={{ fontSize: "35px", color: "white", fontWeight: "700" }}
+            sx={{ fontSize: { xs: "26px", md: "35px" }, color: "white", fontWeight: "700" }}
           >
             Featured Properties
           </Typography>
           <Typography
-            sx={{ fontSize: "16px", color: "#ccc", fontWeight: "500", my: 3 }}
+            sx={{ fontSize: { xs: "14px", md: "16px" }, color: "#ccc", fontWeight: "500", my: 3 }}
           >
             Everything you need to know about houses!
           </Typography>
@@ -49,13 +55,14 @@ const GetStarted = () => {
             color="#17275F"
             buttonText="Get Started Now"
             getStartedBtn={true}
+            navigateTo="/contact"
           />
         </Box>
 
         <img
           src={homeIllustration}
           alt="illustration"
-          style={{ maxWidth: "100%" }}
+          style={{ maxWidth: "100%", height: "auto" }}
         />
       </CustomContainer>
     </CustomBox>

@@ -31,8 +31,8 @@ const Hero = () => {
 
   return (
     <Box sx={{ backgroundColor: "#E6F0FF", minHeight: "80vh" }}>
+      <Navbar />
       <Container>
-        <Navbar />
         <CustomBox>
           <Box sx={{ flex: "1" }}>
             <Typography
@@ -43,29 +43,46 @@ const Hero = () => {
                 fontWeight: "500",
                 mt: 10,
                 mb: 4,
+                animation: "fadeInUp 0.8s ease",
               }}
             >
               Welcome to POSh (Property of Sale Home)
             </Typography>
-            <Title variant="h1">
+            <Title
+              variant="h1"
+              sx={{ animation: "fadeInUp 0.8s ease 0.2s both" }}
+            >
               Discover a place where you'll love to live.
             </Title>
             <Typography
               variant="body2"
-              sx={{ fontSize: "18px", color: "#5A6473", my: 4 }}
+              sx={{
+                fontSize: "18px",
+                color: "#5A6473",
+                my: 4,
+                animation: "fadeInUp 0.8s ease 0.4s both",
+              }}
             >
               Be the first to get the best real estate deals before they hit the
               mass market! Hot foreclosure deals with one simple search!
             </Typography>
-            <CustomButton
-              backgroundColor="#0F1B4C"
-              color="#fff"
-              buttonText="More About Us"
-              heroBtn={true}
-            />
+            <Box sx={{ animation: "fadeInUp 0.8s ease 0.6s both" }}>
+              <CustomButton
+                backgroundColor="#0F1B4C"
+                color="#fff"
+                buttonText="More About Us"
+                heroBtn={true}
+                navigateTo="/about"
+              />
+            </Box>
           </Box>
 
-          <Box sx={{ flex: "1.25" }}>
+          <Box
+            sx={{
+              flex: "1.25",
+              animation: "fadeIn 1s ease 0.4s both",
+            }}
+          >
             <img
               src={heroImg}
               alt="heroImg"

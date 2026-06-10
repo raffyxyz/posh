@@ -1,9 +1,13 @@
 import { styled, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import React from "react";
+import useScrollReveal from "../hooks/useScrollReveal";
 import houseCard from "../media/houseCard.png";
 
 const Details = () => {
+  const [contentRef, contentVisible] = useScrollReveal();
+  const [statsRef, statsVisible] = useScrollReveal();
+
   const CustomBox = styled(Box)(({ theme }) => ({
     display: "flex",
     gap: theme.spacing(10),
@@ -28,6 +32,9 @@ const Details = () => {
     color: "#000",
     fontWeight: "700",
     [theme.breakpoints.down("md")]: {
+      fontSize: "40px",
+    },
+    [theme.breakpoints.down("sm")]: {
       fontSize: "32px",
     },
   }));
@@ -37,6 +44,9 @@ const Details = () => {
     color: "#7B8087",
     fontWeight: "500",
     [theme.breakpoints.down("md")]: {
+      fontSize: "16px",
+    },
+    [theme.breakpoints.down("sm")]: {
       fontSize: "14px",
     },
   }));
@@ -49,6 +59,7 @@ const Details = () => {
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
       gap: theme.spacing(5),
+      padding: theme.spacing(0, 2, 0, 2),
     },
   }));
 
@@ -63,9 +74,12 @@ const Details = () => {
   }));
 
   return (
-    <Box sx={{ py: 10 }}>
+    <Box sx={{ py: { xs: 6, md: 10 } }}>
       <Container>
-        <CustomBox>
+        <CustomBox
+          ref={contentRef}
+          className={`reveal ${contentVisible ? "visible" : ""}`}
+        >
           <ImgContainer>
             <img src={houseCard} alt="house" style={{ maxWidth: "100%" }} />
           </ImgContainer>
@@ -74,18 +88,18 @@ const Details = () => {
             <Divider />
             <Typography
               sx={{
-                fontSize: "35px",
+                fontSize: { xs: "26px", md: "35px" },
                 color: "#000339",
                 fontWeight: "700",
                 my: 3,
               }}
             >
-              You’ve found a neighborhood you love.
+              You've found a neighborhood you love.
             </Typography>
 
             <Typography
               sx={{
-                fontSize: "16px",
+                fontSize: { xs: "14px", md: "16px" },
                 color: "#5A6473",
                 lineHeight: "27px",
               }}
@@ -97,7 +111,10 @@ const Details = () => {
           </Box>
         </CustomBox>
 
-        <TextFlexbox>
+        <TextFlexbox
+          ref={statsRef}
+          className={`reveal ${statsVisible ? "visible" : ""}`}
+        >
           <Box
             sx={{
               display: "flex",

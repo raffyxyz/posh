@@ -1,5 +1,6 @@
 import { Box, styled, Typography } from "@mui/material";
 import React from "react";
+import useScrollReveal from "../hooks/useScrollReveal";
 
 import buyIcon from "../media/buy_icon.png";
 import sellIcon from "../media/sell_icon.png";
@@ -9,12 +10,10 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import CustomButton from "./CustomButton";
 
 const Guide = () => {
-  const CustomBox = styled(Box)(({ theme }) => ({
-    width: "30%",
-    [theme.breakpoints.down("md")]: {
-      width: "85%",
-    },
-  }));
+  const [titleRef, titleVisible] = useScrollReveal();
+  const [cardsRef, cardsVisible] = useScrollReveal();
+
+  const CustomBox = styled(Box)(({ theme }) => ({}));
 
   const GuidesBox = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -28,6 +27,7 @@ const Guide = () => {
     [theme.breakpoints.down("sm")]: {
       marginBottom: "0",
       flexDirection: "column",
+      alignItems: "center",
     },
   }));
 
@@ -48,47 +48,56 @@ const Guide = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        px: { xs: 2, md: 0 },
       }}
     >
-      <div
-        style={{
-          width: "5%",
-          height: "5px",
-          backgroundColor: "#000339",
-          margin: "0 auto",
-        }}
-      ></div>
-
-      <Typography
-        variant="h3"
-        sx={{ fontSize: "35px", fontWeight: "bold", color: "#000339", my: 3 }}
+      <Box
+        ref={titleRef}
+        className={`reveal ${titleVisible ? "visible" : ""}`}
+        sx={{ textAlign: "center" }}
       >
-        How it works?
-      </Typography>
-
-      <CustomBox>
-        <Typography
-          variant="body2"
-          sx={{
-            fontSize: "16px",
-            fontWeight: "500",
-            color: "#5A6473",
-            textAlign: "center",
+        <div
+          style={{
+            width: "5%",
+            height: "5px",
+            backgroundColor: "#000339",
+            margin: "0 auto",
           }}
+        ></div>
+        <Typography
+          variant="h3"
+          sx={{ fontSize: { xs: "26px", md: "35px" }, fontWeight: "bold", color: "#000339", my: 3 }}
         >
-          Everything you need to know when you want to buy, rent or sell - All
-          in one place
+          How it works?
         </Typography>
-      </CustomBox>
 
-      <GuidesBox>
+        <CustomBox>
+          <Typography
+            variant="body2"
+            sx={{
+              fontSize: "16px",
+              fontWeight: "500",
+              color: "#5A6473",
+              textAlign: "center",
+            }}
+          >
+            Everything you need to know when you want to buy, rent or sell - All
+            in one place
+          </Typography>
+        </CustomBox>
+      </Box>
+
+      <GuidesBox
+        ref={cardsRef}
+        className={`reveal ${cardsVisible ? "visible" : ""}`}
+      >
         <GuideBox>
           <img src={buyIcon} alt="buyIcon" />
           <Typography
             variant="body2"
             sx={{
               fontWeight: "500",
-              fontSize: "20px",
+              fontSize: { xs: "18px", md: "20px" },
               color: "#3B3c45",
               my: 1,
             }}
@@ -119,7 +128,7 @@ const Guide = () => {
             variant="body2"
             sx={{
               fontWeight: "500",
-              fontSize: "20px",
+              fontSize: { xs: "18px", md: "20px" },
               color: "#3B3c45",
               my: 1,
             }}
@@ -150,7 +159,7 @@ const Guide = () => {
             variant="body2"
             sx={{
               fontWeight: "500",
-              fontSize: "20px",
+              fontSize: { xs: "18px", md: "20px" },
               color: "#3B3c45",
               my: 1,
             }}
@@ -181,6 +190,7 @@ const Guide = () => {
         color="#fff"
         buttonText="See Full Guides"
         guideBtn={true}
+        navigateTo="/properties"
       />
     </Box>
   );

@@ -1,5 +1,6 @@
 import { Button, styled } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const CustomButton = ({
   backgroundColor,
@@ -8,7 +9,10 @@ const CustomButton = ({
   heroBtn,
   guideBtn,
   getStartedBtn,
+  navigateTo,
 }) => {
+  const navigate = useNavigate();
+
   const CustomButton = styled(Button)(({ theme }) => ({
     backgroundColor: backgroundColor,
     color: color,
@@ -35,7 +39,13 @@ const CustomButton = ({
     },
   }));
 
-  return <CustomButton>{buttonText}</CustomButton>;
+  const handleClick = () => {
+    if (navigateTo) {
+      navigate(navigateTo);
+    }
+  };
+
+  return <CustomButton onClick={handleClick}>{buttonText}</CustomButton>;
 };
 
 export default CustomButton;
